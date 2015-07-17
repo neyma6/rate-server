@@ -1,17 +1,17 @@
-package com.gabor.csatlos;
+package com.gabor.csatlos.utils;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import com.gabor.csatlos.entities.TestEntity;
+import com.gabor.csatlos.entities.User;
 import com.googlecode.objectify.ObjectifyService;
-
-import entities.TestEntity;
 
 public class OfyHelper implements ServletContextListener {
 	  public void contextInitialized(ServletContextEvent event) {
-	    // This will be invoked as part of a warmup request, or the first user
-	    // request if no warmup request was invoked.
+
 	    ObjectifyService.register(TestEntity.class);
+	    ObjectifyService.register(User.class);
 
 	  }
 

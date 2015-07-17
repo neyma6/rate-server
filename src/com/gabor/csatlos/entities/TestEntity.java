@@ -1,4 +1,4 @@
-package entities;
+package com.gabor.csatlos.entities;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;

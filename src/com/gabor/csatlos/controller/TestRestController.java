@@ -1,4 +1,4 @@
-package com.gabor.csatlos;
+package com.gabor.csatlos.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gabor.csatlos.entities.TestEntity;
 import com.googlecode.objectify.ObjectifyService;
-
-import entities.TestEntity;
 
 
 @Controller()
