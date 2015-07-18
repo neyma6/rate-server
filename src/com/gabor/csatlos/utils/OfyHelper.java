@@ -3,15 +3,15 @@ package com.gabor.csatlos.utils;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.gabor.csatlos.entities.TestEntity;
+import com.gabor.csatlos.entities.Image;
 import com.gabor.csatlos.entities.User;
 import com.googlecode.objectify.ObjectifyService;
 
 public class OfyHelper implements ServletContextListener {
 	  public void contextInitialized(ServletContextEvent event) {
 
-	    ObjectifyService.register(TestEntity.class);
 	    ObjectifyService.register(User.class);
+	    ObjectifyService.register(Image.class);
 
 	  }
 

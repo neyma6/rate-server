@@ -22,5 +22,6 @@
 	<classpathentry kind="lib" path="/Users/neyma/Projects/STS_Workplace/Rate-App-Server3/war/WEB-INF/lib/jackson-mapper-asl-1.9.13.jar"/>
 	<classpathentry kind="lib" path="/Users/neyma/Projects/STS_Workplace/Rate-App-Server3/war/WEB-INF/lib/objectify-4.0.1.jar"/>
 	<classpathentry kind="lib" path="/Users/neyma/Projects/STS_Workplace/Rate-App-Server3/war/WEB-INF/lib/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="/Users/neyma/Projects/STS_Workplace/Rate-App-Server3/war/WEB-INF/lib/commons-codec-1.10.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

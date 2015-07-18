@@ -14,18 +14,6 @@ public class User {
 	private double rateValues;
 	private int numberOfRates;
 	private boolean facebookUser;
-	
-	public User() {
-	}
-
-	public User(String id, String name, String password, double rateValues, int numberOfRates, boolean facebookUser) {
-		this.id = id;
-		this.name = name;
-		this.password = password;
-		this.rateValues = rateValues;
-		this.numberOfRates = numberOfRates;
-		this.facebookUser = facebookUser;
-	}
 
 	public String getId() {
 		return id;
@@ -75,4 +63,15 @@ public class User {
 		this.facebookUser = facebookUser;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", rateValues=" + rateValues
+				+ ", numberOfRates=" + numberOfRates + ", facebookUser=" + facebookUser + "]";
+	}
+	
+	public static boolean isFacebookUser(String id) {
+		return !id.contains("@");
+	}
+
+	
 }
