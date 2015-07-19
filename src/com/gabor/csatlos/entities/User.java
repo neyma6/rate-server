@@ -11,7 +11,7 @@ public class User {
 	
 	private String name;
 	private String password;
-	private double rateValues;
+	private int rateValues;
 	private int numberOfRates;
 	private boolean facebookUser;
 
@@ -39,11 +39,11 @@ public class User {
 		this.password = password;
 	}
 
-	public double getRateValues() {
+	public int getRateValues() {
 		return rateValues;
 	}
 
-	public void setRateValues(double rateValues) {
+	public void setRateValues(int rateValues) {
 		this.rateValues = rateValues;
 	}
 

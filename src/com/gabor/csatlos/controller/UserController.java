@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,6 @@ import com.gabor.csatlos.utils.ResponseBuilder;
 
 @Controller
 @RequestMapping("/user")
-//required = false because the controller should handle the error and send back a json instead of http status
 public class UserController {
 
 	@Autowired
@@ -27,13 +27,9 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public Map<String, Object> register(@RequestParam(required = false) String id,
-										@RequestParam(required = false) String name, 
-										@RequestParam(required = false) String password) {
-		
-		if (!isParamsValid(id, name, password)) {
-			return ResponseBuilder.sendError(ErrorStatus.INVALID_PARAMETER);
-		}
+	public Map<String, Object> register(@RequestParam String id,
+										@RequestParam String name, 
+										@RequestParam String password) {
 		
 		User user = new User();
 		user.setId(id);
@@ -46,13 +42,9 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public Map<String, Object> update(@RequestParam(required = false) String id,
-									  @RequestParam(required = false) String name, 
-									  @RequestParam(required = false) String password) {
-		
-		if (!isParamsValid(id, name, password)) {
-			return ResponseBuilder.sendError(ErrorStatus.INVALID_PARAMETER);
-		}
+	public Map<String, Object> update(@RequestParam String id,
+									  @RequestParam String name, 
+									  @RequestParam String password) {
 		
 		User user = new User();
 		user.setId(id);
@@ -64,12 +56,8 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public Map<String, Object> get(@RequestParam(required = false) String id,
-								   @RequestParam(required = false) String password) {
-		
-		if (!isParamsValid(id, password)) {
-			return ResponseBuilder.sendError(ErrorStatus.INVALID_PARAMETER);
-		}
+	public Map<String, Object> get(@RequestParam String id,
+								   @RequestParam String password) {
 		
 		User user = new User();
 		user.setId(id);
@@ -78,13 +66,10 @@ public class UserController {
 		return userService.get(user);
 	}
 	
-	private boolean isParamsValid(String... params) {
-		for (String param : params) {
-			if (!StringUtils.hasText(param)) {
-				return false;
-			}
-		}
-		return true;
+	@ExceptionHandler(Exception.class)
+	@ResponseBody
+	public Map<String, Object> handleBadRequest() {
+		return ResponseBuilder.sendError(ErrorStatus.INVALID_PARAMETER);
 	}
 	
 }

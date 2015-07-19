@@ -21,7 +21,7 @@ public class UserService {
 			}
 			
 			user.setNumberOfRates(0);
-			user.setRateValues(0.0f);
+			user.setRateValues(0);
 			
 			ObjectifyService.ofy().save().entity(user).now();
 			
