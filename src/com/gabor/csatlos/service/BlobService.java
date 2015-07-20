@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.gabor.csatlos.domain.ErrorStatus;
@@ -21,6 +22,8 @@ import com.googlecode.objectify.ObjectifyService;
 @Service
 public class BlobService {
 
+	private static final Logger LOGGER = Logger.getLogger(BlobService.class);
+	
 	private final BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 	
 	public Map<String, Object> generateUploadUrl(String path) {
@@ -29,6 +32,7 @@ public class BlobService {
 		String uploadURI = blobstoreService.createUploadUrl(path);
 			return ResponseBuilder.sendSuccess(uploadURI);
 		} catch (Exception ex) {
+			LOGGER.error("BlobService/generateUploadUrl", ex);
 			return ResponseBuilder.sendError(ErrorStatus.ERROR_OCCURED);
 		}
 	}
@@ -51,6 +55,7 @@ public class BlobService {
 		    
 		    return ResponseBuilder.sendSuccess(imageUrl);
 		} catch (Exception ex) {
+			LOGGER.error("BlobService/upload", ex);
 			return ResponseBuilder.sendError(ErrorStatus.ERROR_OCCURED);
 		}
 	}

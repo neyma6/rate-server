@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,12 +16,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.gabor.csatlos.domain.ErrorStatus;
 import com.gabor.csatlos.domain.ResponseParam;
 import com.gabor.csatlos.service.BlobService;
+import com.gabor.csatlos.service.RateService;
 import com.gabor.csatlos.utils.ResponseBuilder;
 
 @Controller
 @RequestMapping("/blob")
 public class BlobController {
 
+	private static final Logger LOGGER = Logger.getLogger(BlobController.class);
+	
 	@Autowired
 	private BlobService blobService;
 	
@@ -38,7 +42,8 @@ public class BlobController {
 	
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
-	public Map<String, Object> handleBadRequest() {
+	public Map<String, Object> handleBadRequest(Exception ex) {
+		LOGGER.error("BlobController/handleBadRequest", ex);
 		return ResponseBuilder.sendError(ErrorStatus.INVALID_PARAMETER);
 	}
 	

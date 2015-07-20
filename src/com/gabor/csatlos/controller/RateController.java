@@ -2,6 +2,7 @@ package com.gabor.csatlos.controller;
 
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -19,6 +20,7 @@ import com.gabor.csatlos.utils.ResponseBuilder;
 @RequestMapping("/rate")
 public class RateController {
 
+	private static final Logger LOGGER = Logger.getLogger(RateController.class);
 	
 	@Autowired
 	private RateService rateService;
@@ -39,6 +41,7 @@ public class RateController {
 		try {
 			rate = Integer.parseInt(rateValue);
 		} catch (Exception ex) {
+			LOGGER.error("RateController/set", ex);
 			return ResponseBuilder.sendError(ErrorStatus.INVALID_PARAMETER_TYPE);
 		}
 		
@@ -47,7 +50,8 @@ public class RateController {
 	
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
-	public Map<String, Object> handleBadRequest() {
+	public Map<String, Object> handleBadRequest(Exception ex) {
+		LOGGER.error("RateController/handleBadRequest", ex);
 		return ResponseBuilder.sendError(ErrorStatus.INVALID_PARAMETER);
 	}
 }

@@ -2,6 +2,7 @@ package com.gabor.csatlos.controller;
 
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -22,6 +23,8 @@ import com.gabor.csatlos.utils.ResponseBuilder;
 @RequestMapping("/user")
 public class UserController {
 
+	private static final Logger LOGGER = Logger.getLogger(UserController.class);
+	
 	@Autowired
 	private UserService userService;
 	
@@ -68,7 +71,8 @@ public class UserController {
 	
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
-	public Map<String, Object> handleBadRequest() {
+	public Map<String, Object> handleBadRequest(Exception ex) {
+		LOGGER.error("UserController/handleBadRequest", ex);
 		return ResponseBuilder.sendError(ErrorStatus.INVALID_PARAMETER);
 	}
 	
