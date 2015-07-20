@@ -5,7 +5,6 @@ public enum ResponseParam {
 	STATUS("status"),
 	ERROR("error"),
 	USER("user"),
-	IMAGE("image"),
 	URL("url");
 	
 	private String name;
