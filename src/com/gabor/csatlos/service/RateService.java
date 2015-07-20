@@ -3,6 +3,7 @@ package com.gabor.csatlos.service;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gabor.csatlos.domain.ErrorStatus;
@@ -14,6 +15,9 @@ import com.googlecode.objectify.ObjectifyService;
 @Service
 public class RateService {
 
+	@Autowired
+	private ImageService imageService;
+	
 	private static final Logger LOGGER = Logger.getLogger(RateService.class);
 	
 	public Map<String, Object> get() {
@@ -25,7 +29,9 @@ public class RateService {
 			Key<User> userKey = ObjectifyService.ofy().load().type(User.class).keys().list().get(randomUserIndex);
 			User user = ObjectifyService.ofy().load().type(User.class).id(userKey.getName()).now();
 			
-			return ResponseBuilder.sendSuccess(user);
+			String imageUrl = imageService.getImage(user.getId());
+			
+			return ResponseBuilder.sendSuccess(user, imageUrl);
 			
 		} catch(Exception ex) {
 			LOGGER.error("RateService/get", ex);

@@ -3,6 +3,7 @@ package com.gabor.csatlos.service;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gabor.csatlos.domain.ErrorStatus;
@@ -13,6 +14,9 @@ import com.googlecode.objectify.ObjectifyService;
 @Service
 public class UserService {
 
+	@Autowired
+	private ImageService imageService;
+	
 	private static final Logger LOGGER = Logger.getLogger(UserService.class);
 	
 	public Map<String, Object> register(User user) {
@@ -45,7 +49,9 @@ public class UserService {
 				return ResponseBuilder.sendError(ErrorStatus.INVALID_USER);
 			}
 			
-			return ResponseBuilder.sendSuccess(userFromDb);
+			String imageUrl = imageService.getImage(userFromDb.getId());
+					
+			return ResponseBuilder.sendSuccess(userFromDb, imageUrl);
 		} catch (Exception ex) {
 			LOGGER.error("UserService/get", ex);
 			return ResponseBuilder.sendError(ErrorStatus.ERROR_OCCURED);

@@ -5,7 +5,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +15,6 @@ import com.gabor.csatlos.domain.ErrorStatus;
 import com.gabor.csatlos.entities.User;
 import com.gabor.csatlos.service.UserService;
 import com.gabor.csatlos.utils.ResponseBuilder;
-
-// TODO: check bad request handling
 
 @Controller
 @RequestMapping("/user")

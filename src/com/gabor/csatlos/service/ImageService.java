@@ -9,12 +9,12 @@ import com.googlecode.objectify.ObjectifyService;
 @Service
 public class ImageService {
 
-	public String upload(String id) {
+	public String getImage(String id) {
 		 
 		try {
 			
 			ImageUrl imageUrl = ObjectifyService.ofy().load().type(ImageUrl.class).id(id).now();			
-			return imageUrl.getImageUrl();
+			return imageUrl != null ? imageUrl.getImageUrl() : "";
 			
 		} catch (Exception ex) {
 			return "";
