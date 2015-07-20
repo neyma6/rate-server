@@ -35,6 +35,14 @@ public class ResponseBuilder {
 		return response;
 	}
 	
+	public static Map<String, Object> sendSuccess(String url) {
+		Map<String, Object> response = new HashMap<>();
+		response.put(ResponseParam.STATUS.getName(), ResponeStatus.SUCCESS.getName());
+		response.put(ResponseParam.URL.getName(), url);
+		
+		return response;
+	}
+	
 	public static Map<String, Object> sendSuccess() {
 		Map<String, Object> response = new HashMap<>();
 		response.put(ResponseParam.STATUS.getName(), ResponeStatus.SUCCESS.getName());
