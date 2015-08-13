@@ -57,7 +57,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public Map<String, Object> get(@RequestParam String id,
-								   @RequestParam String password) {
+								   @RequestParam(required = false) String password) {
 		
 		User user = new User();
 		user.setId(id);

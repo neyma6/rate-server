@@ -20,14 +20,17 @@ public class RateService {
 	
 	private static final Logger LOGGER = Logger.getLogger(RateService.class);
 	
-	public Map<String, Object> get() {
+	public Map<String, Object> get(String id) {
 		
 		try {
-			int userCount = ObjectifyService.ofy().load().type(User.class).count();
-			int randomUserIndex = (int)(Math.random() * userCount);
-			
-			Key<User> userKey = ObjectifyService.ofy().load().type(User.class).keys().list().get(randomUserIndex);
-			User user = ObjectifyService.ofy().load().type(User.class).id(userKey.getName()).now();
+			User user;
+			do {
+				int userCount = ObjectifyService.ofy().load().type(User.class).count();
+				int randomUserIndex = (int)(Math.random() * userCount);
+				
+				Key<User> userKey = ObjectifyService.ofy().load().type(User.class).keys().list().get(randomUserIndex);
+				user = ObjectifyService.ofy().load().type(User.class).id(userKey.getName()).now();
+			} while(id.equals(user.getId()));
 			
 			String imageUrl = imageService.getImage(user.getId());
 			

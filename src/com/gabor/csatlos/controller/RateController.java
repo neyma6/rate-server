@@ -27,9 +27,9 @@ public class RateController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public Map<String, Object> get() {
+	public Map<String, Object> get(@RequestParam String id) {
 		
-		return rateService.get();
+		return rateService.get(id);
 	}
 	
 	@ResponseBody

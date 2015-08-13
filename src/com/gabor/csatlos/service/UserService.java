@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gabor.csatlos.domain.ErrorStatus;
+import com.gabor.csatlos.entities.ImageUrl;
 import com.gabor.csatlos.entities.User;
 import com.gabor.csatlos.utils.ResponseBuilder;
 import com.googlecode.objectify.ObjectifyService;
@@ -44,7 +45,7 @@ public class UserService {
 		
 		try {
 			User userFromDb = ObjectifyService.ofy().load().type(User.class).id(user.getId()).now();
-			if (!userFromDb.getPassword().equals(user.getPassword())) {
+			if (!userFromDb.isFacebookUser() && !userFromDb.getPassword().equals(user.getPassword())) {
 				LOGGER.error("UserService/get - user creditials was wrong");
 				return ResponseBuilder.sendError(ErrorStatus.INVALID_USER);
 			}
